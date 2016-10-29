@@ -2,6 +2,7 @@
   overflow: hidden;
   margin: 0 auto;
   width: 80%;
+  perspective: 1000;
 }
 
 .list-posts {
@@ -24,12 +25,17 @@
   transform: scaleX(2);
 }
 
+.item-post:hover .wrap-item-post-hover {
+  opacity: 1;
+}
+
 .link-post {
   text-decoration: none;
   color: #000000;
 }
 
-.wrap-title-post {
+.content-post {
+  z-index: 2;
   overflow: hidden;
   position: absolute;
   margin: 50px 0;
@@ -38,12 +44,24 @@
   width: 80%;
 }
 
+.wrap-title-post, .wrap-subtitle-post {
+  overflow: hidden;
+}
+
 .title-post {
   margin: 20px 0 0 0;
   font-size: 25px;
   font-weight: 700;
   font-family: 'Open Sans Condensed', sans-serif;
   text-transform: uppercase;
+  letter-spacing: 5px;
+}
+
+.subtitle-post {
+  margin: 20px 0 0 0;
+  font-size: 15px;
+  font-weight: 300;
+  font-family: 'Open Sans Condensed', sans-serif;
   letter-spacing: 5px;
 }
 
@@ -66,9 +84,9 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%;
-  height: 50%;
-  background: linear-gradient(0deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
 }
 
 .img-post {
@@ -76,6 +94,56 @@
   width: 100%;
   transition: all 0.5s ease-out;
   transform: scale(1.02);
+}
+
+.types {
+  overflow: auto;
+  z-index: 1;
+  position: absolute;
+  margin: 50px;
+  top: 0;
+  left: 0;
+}
+
+.list-types {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item-type {
+  float: left;
+  margin: 10px;
+  padding: 5px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Open Sans Condensed', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  border-bottom: 1px solid #000000;
+}
+
+.wrap-item-post-hover {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.9);
+  opacity: 0;
+  transition: opacity 0.25s ease-in-out;
+}
+
+.show-more {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50px;
+  height: 50px;
+  border: 1px solid #000000;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
 }
 
 @keyframes width {
