@@ -1,6 +1,5 @@
 .posts {
-  overflow: auto;
-  zoom: 1;
+  overflow: hidden;
   margin: 0 auto;
   width: 80%;
 }
@@ -22,7 +21,7 @@
 }
 
 .item-post:hover .title-post:before {
-  width: 100px;
+  transform: scaleX(2);
 }
 
 .link-post {
@@ -30,12 +29,17 @@
   color: #000000;
 }
 
-.title-post {
+.wrap-title-post {
+  overflow: hidden;
   position: absolute;
-  padding: 20px 0;
+  margin: 50px 0;
   left: 0;
   bottom: 10%;
   width: 80%;
+}
+
+.title-post {
+  margin: 20px 0 0 0;
   font-size: 25px;
   font-weight: 700;
   font-family: 'Open Sans Condensed', sans-serif;
@@ -46,12 +50,12 @@
 .title-post:before {
   content: "";
   position: absolute;
-  top: 0;
+  top: -20px;
   left: 0;
-  width: 60px;
   height: 3px;
   background: #000000;
   transition: all 0.25s ease-in-out;
+  animation: width 0.5s ease-in-out 1s forwards;
 }
 .wrap-img-post {
   overflow: hidden;
@@ -72,4 +76,9 @@
   width: 100%;
   transition: all 0.5s ease-out;
   transform: scale(1.02);
+}
+
+@keyframes width {
+    from {width: 0px}
+    to {width: 60px}
 }

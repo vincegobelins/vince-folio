@@ -21,7 +21,7 @@ export const receivePosts = (page, json) => ({
 
 const fetchPosts = page => dispatch => {
   dispatch(requestPosts(page))
-  return fetch(`http://vincentaguettaz.com/wp-json/wp/v2/portfolio?_embed&per_page=3&page=${page}`)
+  return fetch(`http://vincentaguettaz.com/wp-json/wp/v2/portfolio?_embed&per_page=6&page=${page}`)
     .then(response => response.json())
     .then(json => dispatch(receivePosts(page, json)))
 }

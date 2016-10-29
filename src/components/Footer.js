@@ -1,13 +1,14 @@
 import React, { Component, PropTypes } from 'react'
+import './Footer.css'
 
-export default class FooterOk extends Component {
+export default class Footer extends Component {
 
   render() {
     const{posts} = this.props;
 
     return (
       <footer>
-        <p>Made by vincegobelins with React and Redux.</p>
+        <p className="text-footer">Made by vincegobelins with React and Redux.</p>
       </footer>
     )
   }

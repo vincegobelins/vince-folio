@@ -5,6 +5,7 @@ import Posts from '../components/Posts'
 import BtnMore from '../components/BtnMore'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import { TweenMax, Elastic, CSSPlugin, TimelineLite } from "gsap";
 import './App.css'
 
 class App extends Component {
@@ -59,15 +60,6 @@ class App extends Component {
           </div>
           : ''
         }
-
-        <p>
-          {lastUpdated &&
-            <span>
-              Last updated at {new Date(lastUpdated).toLocaleTimeString()}.
-              {' '}
-            </span>
-          }
-        </p>
         <div>
           <BtnMore isFetching={isFetching} handleGetMoreClick={this.handleGetMoreClick}/>
         </div>
