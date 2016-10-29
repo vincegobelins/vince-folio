@@ -2,6 +2,10 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { nextPage, fetchPostsIfNeeded } from '../actions'
 import Posts from '../components/Posts'
+import BtnMore from '../components/BtnMore'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import './App.css'
 
 class App extends Component {
   static propTypes = {
@@ -28,7 +32,7 @@ class App extends Component {
     this.props.dispatch(nextPage())
   }
 
-  handleRefreshClick = e => {
+  handleGetMoreClick = e => {
     e.preventDefault()
 
     const { dispatch, page } = this.props
@@ -40,6 +44,22 @@ class App extends Component {
     const isEmpty = posts.length === 0
     return (
       <div>
+      <Header />
+        {isEmpty
+          ? ''
+          : <div style={{ opacity: isFetching ? 0.2 : 1 }}>
+              <Posts isFetching={isFetching} posts={posts} />
+            </div>
+        }
+
+        {isFetching
+          ?
+          <div className="loader">
+            <p className="title-loader">Un instant ...</p>
+          </div>
+          : ''
+        }
+
         <p>
           {lastUpdated &&
             <span>
@@ -47,19 +67,11 @@ class App extends Component {
               {' '}
             </span>
           }
-          {!isFetching &&
-            <a href="#"
-               onClick={this.handleRefreshClick.bind(this)}>
-              Refresh
-            </a>
-          }
         </p>
-        {isEmpty
-          ? (isFetching ? <h2>Loading...</h2> : <h2>Empty.</h2>)
-          : <div style={{ opacity: isFetching ? 0.5 : 1 }}>
-              <Posts posts={posts} />
-            </div>
-        }
+        <div>
+          <BtnMore isFetching={isFetching} handleGetMoreClick={this.handleGetMoreClick}/>
+        </div>
+        <Footer />
       </div>
     )
   }

@@ -1,16 +1,20 @@
 import React, { Component, PropTypes } from 'react'
+import Post from '../components/Post'
+import './Posts.css'
 
 export default class Posts extends Component {
 
   render() {
-    const{posts} = this.props;
+    const{posts, isFetching} = this.props;
 
     return (
-      <ul>
-        {posts.map((post, i) =>
-          <li key={i}>{post.title.rendered}</li>
-        )}
-      </ul>
+      <div className="posts">
+        <ul className="list-posts">
+          {posts.map((post, i) =>
+            <Post post={post} i={i} />
+          )}
+        </ul>
+      </div>
     )
   }
 }
