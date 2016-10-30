@@ -2,6 +2,7 @@
   overflow: hidden;
   margin: 0 auto;
   width: 80%;
+  min-height: 300px;
   perspective: 1000;
 }
 
@@ -10,23 +11,27 @@
   padding: 0;
 }
 
-.item-post {
+.wrap-item-post {
   position: relative;
   float: left;
   width: calc(100% / 3);
-  padding: 50px;
+  padding: 60px;
   box-sizing: border-box;
 }
 
-.item-post:hover .img-post {
+.item-post {
+  position: relative;
+}
+
+.wrap-item-post:hover .img-post {
   transform: scale(1);
 }
 
-.item-post:hover .separator-post {
+.wrap-item-post:hover .separator-post {
   transform: scaleX(2);
 }
 
-.item-post:hover .wrap-item-post-hover {
+.wrap-item-post:hover .wrap-item-post-hover {
   opacity: 1;
 }
 
@@ -36,11 +41,10 @@
 }
 
 .content-post {
-  z-index: 2;
+  z-index: 3;
   overflow: hidden;
   position: absolute;
-  margin: 50px 0;
-  left: 0;
+  left: -10%;
   bottom: 10%;
   width: 45%;
 }
@@ -70,8 +74,12 @@
   width: 60px;
   height: 3px;
   background: #000000;
+}
+
+.add-transition {
   transition: all 0.25s ease-in-out;
 }
+
 .wrap-img-post {
   overflow: hidden;
 }
@@ -79,10 +87,10 @@
 .wrap-img-post:after {
   content: "";
   position: absolute;
-  bottom: 50px;
-  left: 50px;
-  width: calc(50% - 100px);
-  height: calc(100% - 100px);
+  bottom: 0px;
+  left: 0px;
+  width: calc(50%);
+  height: calc(100%);
   background: linear-gradient(90deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0));
 }
 
@@ -97,7 +105,6 @@
   overflow: auto;
   z-index: 1;
   position: absolute;
-  margin: 50px;
   top: 0;
   left: 0;
 }
@@ -132,6 +139,16 @@
   transition: opacity 0.25s ease-in-out;
 }
 
+.wrap-item-post-loading {
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(0, 252, 184);
+}
+
 .show-more {
   position: absolute;
   top: 50%;
@@ -155,19 +172,23 @@
   .content-post {
     width: 70%;
   }
-  .item-post {
-    padding: 25px;
+  .wrap-item-post {
+    padding: 40px;
   }
 }
 
 @media only screen and (max-width: 960px) {
-  .item-post {
+  .wrap-item-post {
     width: 50%;
   }
 }
 
 @media only screen and (max-width: 660px) {
-  .item-post {
+  .wrap-item-post {
     width: 100%;
+  }
+
+  .content-post {
+    left: -40px;
   }
 }

@@ -1,3 +1,30 @@
+::selection{
+  background: #00fcb8;
+  color: #000000;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+a, p, strong {
+  line-height: 1.5em;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+a {
+  font-weight: 300;
+  color: #000000;
+}
+
+p {
+  font-weight: 300;
+  margin: 0 0 15px 0;
+}
+
 .loader {
   position: fixed;
   top: 0;
@@ -25,7 +52,7 @@
   left: 50%;
   width: 3px;
   height: 50px;
-  background: #000000;
+  background: #00fcb8;
   transform: translate(-50%, 0);
   animation: rotate 1s infinite linear;
 }

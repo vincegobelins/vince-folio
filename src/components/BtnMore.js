@@ -10,7 +10,14 @@ export default class BtnMore extends Component {
     return (
       <div>
       {isFetching || isFull
-        ? ''
+        ?
+        <div className="get-more is-fetching">
+          <button
+             onClick={handleGetMoreClick}
+             className="btn-get-more">
+            Voir plus de projets
+          </button>
+        </div>
         :
         <div className="get-more">
           <button

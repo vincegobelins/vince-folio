@@ -1,5 +1,5 @@
 .get-more {
-  margin: 50px 0;
+  padding: 20px 0 110px;
 }
 
 .btn-get-more {
@@ -17,7 +17,7 @@
   text-transform: uppercase;
   background: none;
   border: 1px solid #000000;
-  transition: all .25s ease-in-out;
+  transition: color .25s ease-in-out;
 }
 
 .btn-get-more:after {
@@ -38,5 +38,10 @@
 }
 
 .btn-get-more:hover:after {
-  transform: translate(0, 0)
+  transform: translate(0, 0);
+}
+
+.is-fetching {
+  visibility: hidden;
+  opacity: 0;
 }
