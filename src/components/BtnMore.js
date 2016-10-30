@@ -7,13 +7,25 @@ export default class BtnMore extends Component {
     const{isFetching, handleGetMoreClick} = this.props;
 
     return (
-      <div className="get-more">
-        <button
-           onClick={handleGetMoreClick}
-           className="btn-get-more">
-          Voir plus de projets
-        </button>
+      <div>
+      {isFetching
+        ? ''
+        :
+        <div className="get-more">
+          <button
+             onClick={handleGetMoreClick}
+             className="btn-get-more">
+            Voir plus de projets
+          </button>
+        </div>
+      }
       </div>
+
     )
   }
+}
+
+BtnMore.propTypes = {
+  isFetching: PropTypes.bool.isRequired,
+  handleGetMoreClick: PropTypes.func.isRequired
 }

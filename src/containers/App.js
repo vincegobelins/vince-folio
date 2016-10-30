@@ -5,12 +5,11 @@ import Posts from '../components/Posts'
 import BtnMore from '../components/BtnMore'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import { TweenMax, Elastic, CSSPlugin, TimelineLite } from "gsap";
 import './App.css'
 
 class App extends Component {
   static propTypes = {
-    page: PropTypes.string.isRequired,
+    page: PropTypes.number.isRequired,
     posts: PropTypes.array.isRequired,
     isFetching: PropTypes.bool.isRequired,
     lastUpdated: PropTypes.number,
@@ -35,13 +34,11 @@ class App extends Component {
 
   handleGetMoreClick = e => {
     e.preventDefault()
-
-    const { dispatch, page } = this.props
     this.props.dispatch(nextPage())
   }
 
   render() {
-    const { page, posts, isFetching, lastUpdated } = this.props
+    const { posts, isFetching } = this.props
     const isEmpty = posts.length === 0
     return (
       <div>

@@ -21,7 +21,7 @@
   transform: scale(1);
 }
 
-.item-post:hover .title-post:before {
+.item-post:hover .separator-post {
   transform: scaleX(2);
 }
 
@@ -41,7 +41,7 @@
   margin: 50px 0;
   left: 0;
   bottom: 10%;
-  width: 80%;
+  width: 45%;
 }
 
 .wrap-title-post, .wrap-subtitle-post {
@@ -50,7 +50,7 @@
 
 .title-post {
   margin: 20px 0 0 0;
-  font-size: 25px;
+  font-size: 18px;
   font-weight: 700;
   font-family: 'Open Sans Condensed', sans-serif;
   text-transform: uppercase;
@@ -58,22 +58,18 @@
 }
 
 .subtitle-post {
-  margin: 20px 0 0 0;
-  font-size: 15px;
+  margin: 0;
+  font-size: 14px;
   font-weight: 300;
   font-family: 'Open Sans Condensed', sans-serif;
   letter-spacing: 5px;
 }
 
-.title-post:before {
-  content: "";
-  position: absolute;
-  top: -20px;
-  left: 0;
+.separator-post {
+  width: 60px;
   height: 3px;
   background: #000000;
   transition: all 0.25s ease-in-out;
-  animation: width 0.5s ease-in-out 1s forwards;
 }
 .wrap-img-post {
   overflow: hidden;
@@ -82,11 +78,11 @@
 .wrap-img-post:after {
   content: "";
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+  bottom: 50px;
+  left: 50px;
+  width: calc(50% - 100px);
+  height: calc(100% - 100px);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0));
 }
 
 .img-post {
@@ -115,7 +111,7 @@
   float: left;
   margin: 10px;
   padding: 5px;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 700;
   font-family: 'Open Sans Condensed', sans-serif;
   text-transform: uppercase;
@@ -146,7 +142,31 @@
   transform: translate(-50%, -50%);
 }
 
-@keyframes width {
-    from {width: 0px}
-    to {width: 60px}
+.show-more .fa {
+  font-size: 30px;
+  padding: 10px;
+}
+
+@media only screen and (max-width: 1400px) {
+  .posts {
+    width: 95%;
+  }
+  .content-post {
+    width: 70%;
+  }
+  .item-post {
+    padding: 25px;
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  .item-post {
+    width: 50%;
+  }
+}
+
+@media only screen and (max-width: 660px) {
+  .item-post {
+    width: 100%;
+  }
 }
