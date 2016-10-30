@@ -4,18 +4,19 @@ import './BtnMore.css'
 export default class BtnMore extends Component {
 
   render() {
-    const{isFetching, handleGetMoreClick} = this.props;
+    const{isFetching, page, handleGetMoreClick} = this.props;
+    const isFull = page.fullLength - (page.cursor*6) < 0;
 
     return (
       <div>
-      {isFetching
+      {isFetching || isFull
         ? ''
         :
         <div className="get-more">
           <button
              onClick={handleGetMoreClick}
              className="btn-get-more">
-            Voir plus de projets
+            Voir plus de projets <strong>({page.fullLength - (page.cursor*6)}+)</strong>
           </button>
         </div>
       }
@@ -27,5 +28,6 @@ export default class BtnMore extends Component {
 
 BtnMore.propTypes = {
   isFetching: PropTypes.bool.isRequired,
-  handleGetMoreClick: PropTypes.func.isRequired
+  handleGetMoreClick: PropTypes.func.isRequired,
+  page: PropTypes.object.isRequired,
 }

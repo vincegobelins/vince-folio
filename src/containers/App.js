@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { nextPage, fetchPostsIfNeeded } from '../actions'
+import { nextPage, fetchPostsIfNeeded, fetchLength } from '../actions'
 import Posts from '../components/Posts'
 import BtnMore from '../components/BtnMore'
 import Header from '../components/Header'
@@ -9,7 +9,7 @@ import './App.css'
 
 class App extends Component {
   static propTypes = {
-    page: PropTypes.number.isRequired,
+    page: PropTypes.object.isRequired,
     posts: PropTypes.array.isRequired,
     isFetching: PropTypes.bool.isRequired,
     lastUpdated: PropTypes.number,
@@ -19,10 +19,11 @@ class App extends Component {
   componentDidMount() {
     const { dispatch, page } = this.props;
     dispatch(fetchPostsIfNeeded(page))
+    dispatch(fetchLength(page))
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.page !== this.props.page) {
+    if (nextProps.page.cursor !== this.props.page.cursor) {
       const { dispatch, page } = nextProps
       dispatch(fetchPostsIfNeeded(page))
     }
@@ -38,7 +39,7 @@ class App extends Component {
   }
 
   render() {
-    const { posts, isFetching } = this.props
+    const { posts, page, isFetching } = this.props
     const isEmpty = posts.length === 0
     return (
       <div>
@@ -58,7 +59,7 @@ class App extends Component {
           : ''
         }
         <div>
-          <BtnMore isFetching={isFetching} handleGetMoreClick={this.handleGetMoreClick}/>
+          <BtnMore isFetching={isFetching} page={page} handleGetMoreClick={this.handleGetMoreClick}/>
         </div>
         <Footer />
       </div>

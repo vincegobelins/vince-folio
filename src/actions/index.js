@@ -1,5 +1,6 @@
 export const REQUEST_POSTS = 'REQUEST_POSTS'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
+export const REQUEST_LENGTH = 'REQUEST_LENGTH'
 export const RECEIVE_LENGTH = 'RECEIVE_LENGTH'
 export const NEXT_PAGE = 'NEXT_PAGE'
 
@@ -20,14 +21,14 @@ export const receivePosts = (page, json) => ({
   receivedAt: Date.now()
 })
 
-export const receiveLength = (length) => ({
+export const receiveLength = (fullLength) => ({
   type: RECEIVE_LENGTH,
-  length
+  fullLength
 })
 
 const fetchPosts = page => dispatch => {
   dispatch(requestPosts(page))
-  return fetch(`http://vincentaguettaz.com/wp-json/wp/v2/portfolio?_embed&per_page=6&page=${page}`)
+  return fetch(`http://vincentaguettaz.com/wp-json/wp/v2/portfolio?_embed&per_page=6&page=${page.cursor}`)
     .then(response => response.json())
     .then(json => dispatch(receivePosts(page, json)))
     //dispatch(receiveLength(response.headers.get('X-WP-Total')))
@@ -48,4 +49,10 @@ export const fetchPostsIfNeeded = page => (dispatch, getState) => {
   if (shouldFetchPosts(getState(), page)) {
     return dispatch(fetchPosts(page))
   }
+}
+
+export const fetchLength = page => dispatch => {
+  return fetch(`http://vincentaguettaz.com/wp-json/wp/v2/portfolio?_embed&per_page=6&page=${page.cursor}`)
+    .then(response => response)
+    .then(response => dispatch(receiveLength(response.headers.get('X-WP-Total'))))
 }
