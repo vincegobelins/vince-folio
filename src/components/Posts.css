@@ -23,10 +23,6 @@
   position: relative;
 }
 
-.wrap-item-post:hover .img-post {
-  transform: scale(1);
-}
-
 .wrap-item-post:hover .separator-post {
   transform: scaleX(2);
 }
@@ -46,7 +42,7 @@
   position: absolute;
   left: -10%;
   bottom: 10%;
-  width: 45%;
+  width: 60%;
 }
 
 .wrap-title-post, .wrap-subtitle-post {
@@ -98,7 +94,6 @@
   display: block;
   width: 100%;
   transition: all 0.5s ease-out;
-  transform: scale(1.02);
 }
 
 .types {
@@ -117,7 +112,7 @@
 
 .item-type {
   float: left;
-  margin: 10px;
+  margin: 5px;
   padding: 5px;
   font-size: 12px;
   font-weight: 700;

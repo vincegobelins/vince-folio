@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux'
 import {
   NEXT_PAGE, RECEIVE_LENGTH,
-  REQUEST_POSTS, RECEIVE_POSTS
+  REQUEST_POSTS, RECEIVE_POSTS,
+  OPEN_ITEM, CLOSE_ITEM
 } from '../actions'
 
 const page = (state = { cursor: 1, fullLength: 0 }, action) => {
@@ -42,8 +43,27 @@ const postsByVince = (state = { isFetching: false, didInvalidate: false, items: 
   }
 }
 
+const popin = (state = { isOpen: false, itemSelected: [] }, action) => {
+  switch (action.type) {
+    case OPEN_ITEM:
+      return {
+        ...state,
+        isOpen: true,
+        itemSelected: action.selected
+      }
+    case CLOSE_ITEM:
+      return {
+        ...state,
+        isOpen: false,
+      }
+    default:
+      return state
+  }
+}
+
 
 const rootReducer = combineReducers({
+  popin,
   page,
   postsByVince
 })

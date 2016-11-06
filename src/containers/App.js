@@ -1,10 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { nextPage, fetchPostsIfNeeded, fetchLength } from '../actions'
+import { bindActionCreators } from 'redux';
+import * as actions from '../actions'
 import Posts from '../components/Posts'
 import BtnMore from '../components/BtnMore'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import Popin from '../components/Popin'
 import './App.css'
 
 class App extends Component {
@@ -13,41 +15,52 @@ class App extends Component {
     posts: PropTypes.array.isRequired,
     isFetching: PropTypes.bool.isRequired,
     lastUpdated: PropTypes.number,
-    dispatch: PropTypes.func.isRequired
   }
 
   componentDidMount() {
-    const { dispatch, page } = this.props;
-    dispatch(fetchPostsIfNeeded(page))
-    dispatch(fetchLength(page))
+    const { page, actions } = this.props;
+
+    this.fetchPostsIfNeeded(page)
+    this.fetchLength(page)
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.page.cursor !== this.props.page.cursor) {
-      const { dispatch, page } = nextProps
-      dispatch(fetchPostsIfNeeded(page))
+      const { page } = nextProps
+      this.fetchPostsIfNeeded(page)
     }
   }
 
-  handleChange = nextReddit => {
-    this.props.dispatch(nextPage())
+  fetchPostsIfNeeded(page) {
+    this.props.actions.fetchPostsIfNeeded(page)
   }
 
-  handleGetMoreClick = e => {
+  fetchLength(page) {
+    this.props.actions.fetchLength(page)
+  }
+
+  nextPage() {
+    this.props.actions.nextPage()
+  }
+
+  handleGetMoreClick (e) {
     e.preventDefault()
-    this.props.dispatch(nextPage())
+    this.nextPage()
   }
 
   render() {
-    const { posts, page, isFetching } = this.props
+    const { posts, page, popin, isFetching, isOpen, itemSelected, actions } = this.props
     const isEmpty = posts.length === 0
     return (
       <div>
+      <div style={{ opacity: isOpen ? 1 : 0 }}>
+        <Popin popin={popin} posts={posts} actions={actions} />
+      </div>
       <Header />
         {isEmpty
           ? ''
           : <div style={{ opacity: isFetching ? 0.2 : 1 }}>
-              <Posts isFetching={isFetching} posts={posts} />
+              <Posts isFetching={isFetching} posts={posts} actions={actions} />
             </div>
         }
 
@@ -59,7 +72,7 @@ class App extends Component {
           : ''
         }
         <div>
-          <BtnMore isFetching={isFetching} page={page} handleGetMoreClick={this.handleGetMoreClick}/>
+          <BtnMore isFetching={isFetching} page={page} handleGetMoreClick={this.handleGetMoreClick.bind(this)}/>
         </div>
         <Footer />
       </div>
@@ -68,22 +81,24 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  const { page, postsByVince } = state
-  const {
-    isFetching,
-    lastUpdated,
-    items: posts
-  } = postsByVince || {
-    isFetching: true,
-    items: []
-  }
+  const { page, popin, postsByVince } = state
+  const { isFetching, lastUpdated, items: posts } = postsByVince || { isFetching: true, items: [] }
+  const { isOpen, itemSelected } = popin || { isOpen: false, itemSelected: 0 }
 
   return {
     page,
     posts,
+    popin,
     isFetching,
+    isOpen,
     lastUpdated
   }
 }
 
-export default connect(mapStateToProps)(App)
+const mapDispatchToProps = dispatch => {
+  return {
+    actions : bindActionCreators(actions, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

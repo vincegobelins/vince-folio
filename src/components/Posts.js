@@ -5,13 +5,13 @@ import './Posts.css'
 export default class Posts extends Component {
 
   render() {
-    const{posts} = this.props;
+    const{posts, actions} = this.props;
 
     return (
       <div className="posts">
         <ul className="list-posts">
           {posts.map((post, i) =>
-            <Post post={post} i={i} key={i} />
+            <Post post={post} actions={actions} i={i} key={i} />
           )}
         </ul>
       </div>

@@ -6,6 +6,7 @@ export default class BtnMore extends Component {
   render() {
     const{isFetching, page, handleGetMoreClick} = this.props;
     const isFull = page.fullLength - (page.cursor*6) < 0;
+    console.log(this.props);
 
     return (
       <div>

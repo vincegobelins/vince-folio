@@ -17,7 +17,7 @@ export default class Post extends Component {
      let img = this.refs.img;
      let length = 6;
      let delay = i - (Math.floor( i / length) * length);
-     let t = new TimelineLite({onComplete: this.addTransition.bind(this)});;
+     let t = new TimelineLite({onComplete: this.addTransition.bind(this)});
      //TweenMax.set(sq1, {css:{opacity: 0}});
 
      t.from(post, 0.5, {css:{opacity: 0, rotationX : '20deg'}}, delay / 4);
@@ -32,13 +32,17 @@ export default class Post extends Component {
     this.setState({ class: 'add-transition' })
   }
 
+  openItem(params) {
+    this.props.actions.openItem(params.i);
+  }
+
   render() {
     const{post, i} = this.props;
 
     return (
             <li ref="post" className="wrap-item-post" key={i}>
               <div className="item-post">
-              <a target="_blank" className="link-post" href={post.acf.link}>
+              <a target="_blank" className="link-post" onClick={this.openItem.bind(this, {i})}>
                 <div className="wrap-img-post">
                   <img alt="vincegobelins" ref="img" className="img-post" src={post._embedded["wp:featuredmedia"]["0"].media_details.sizes.portfolio.source_url}/>
                 </div>

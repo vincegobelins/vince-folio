@@ -3,6 +3,18 @@ export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const REQUEST_LENGTH = 'REQUEST_LENGTH'
 export const RECEIVE_LENGTH = 'RECEIVE_LENGTH'
 export const NEXT_PAGE = 'NEXT_PAGE'
+export const OPEN_ITEM = 'OPEN_ITEM'
+export const CLOSE_ITEM = 'CLOSE_ITEM'
+
+export const openItem = selected => ({
+  type: OPEN_ITEM,
+  selected
+})
+
+export const closeItem = selected => ({
+  type: CLOSE_ITEM,
+  selected
+})
 
 export const nextPage = page => ({
   type: NEXT_PAGE,
